@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import "./index.css";
-import PropTypes from "prop-types";
+import Home from './pages/Home/Home';
+import Shopping from './pages/Shopping/Shopping';
 
-const App = ({ children }) => {
+const App = () => {
   const [cartHidden, setCartHidden] = useState(true);
   const [productList, setProductList] = useState([]);
   const [buyList, setBuyList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
@@ -41,20 +42,21 @@ const App = ({ children }) => {
     );
   }
 
+  console.log(window.location.pathname);
   return (
     <div className="">
       <Navbar handleClick={handleCartClick} />
-      {children}
+      {window.location.pathname === "/" ?
+        <Home /> :
+        window.location.pathname === "/shop" ?
+          <Shopping /> :
+          null}
       {cartHidden ?
         null :
         <ShoppingCart handleClick={handleCartClick} />
       }
     </div>
   )
-}
-
-App.propTypes = {
-  children: PropTypes.element.isRequired
 }
 
 export default App;
