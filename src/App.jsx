@@ -33,7 +33,13 @@ const App = ({ children }) => {
   }
 
   if (error) return <p>A network error was encountered</p>
-  if (loading) return <p>Loading...</p>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin border-t-blue-400 border-sky-50 border-8 rounded-full w-20 h-20"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="">
