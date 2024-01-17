@@ -8,7 +8,7 @@ import Shopping from './pages/Shopping/Shopping';
 const App = () => {
   const [cartHidden, setCartHidden] = useState(true);
   const [productList, setProductList] = useState([]);
-  const [buyList, setBuyList] = useState([]);
+  const [cartList, setCartList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -20,7 +20,7 @@ const App = () => {
         }
         return res.json()
       })
-      .then(json => setProductList([json]))
+      .then(json => setProductList(json))
       .catch((error) => setError(error))
       .finally(() => setLoading(false))
   }, []);
@@ -33,6 +33,27 @@ const App = () => {
     }
   }
 
+  const handleAddingToCart = (title, qty) => {
+    let exists = cartList.filter((product) => {
+      return Object.values(product).includes(title);
+    }).length > 0;
+
+    if (exists) {
+      const updatedCart = cartList.map((product) => {
+        if (product.title === title) {
+          return {
+            ...product,
+            qty: qty + product.qty,
+          }
+        }
+        return product;
+      });
+      setCartList(updatedCart);
+    } else {
+      setCartList((cartList) => ([...cartList, { title, qty }]));
+    }
+  }
+
   if (error) return <p>A network error was encountered</p>
   if (loading) {
     return (
@@ -42,18 +63,17 @@ const App = () => {
     );
   }
 
-  console.log(window.location.pathname);
   return (
     <div className="">
       <Navbar handleClick={handleCartClick} />
       {window.location.pathname === "/" ?
         <Home /> :
         window.location.pathname === "/shop" ?
-          <Shopping /> :
+          <Shopping productList={productList} handleAdding={handleAddingToCart} /> :
           null}
       {cartHidden ?
         null :
-        <ShoppingCart handleClick={handleCartClick} />
+        <ShoppingCart productList={productList} cartList={cartList} handleClick={handleCartClick} />
       }
     </div>
   )
