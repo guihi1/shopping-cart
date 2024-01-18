@@ -33,7 +33,7 @@ const App = () => {
     }
   }
 
-  const handleAddingToCart = (title, qty) => {
+  const handleAddingToCart = (title, qty, image, price) => {
     let exists = cartList.filter((product) => {
       return Object.values(product).includes(title);
     }).length > 0;
@@ -43,15 +43,28 @@ const App = () => {
         if (product.title === title) {
           return {
             ...product,
-            qty: qty + product.qty,
+            qty: Number(qty) + Number(product.qty),
           }
         }
         return product;
       });
       setCartList(updatedCart);
     } else {
-      setCartList((cartList) => ([...cartList, { title, qty }]));
+      setCartList((cartList) => ([...cartList, { title, qty: Number(qty), image, price: Number(price) }]));
     }
+  }
+
+  const onQtyChange = (e) => {
+    const updatedCart = cartList.map((product) => {
+      if (product.image === e.target.id) {
+        return {
+          ...product,
+          qty: Number(e.target.value),
+        }
+      }
+      return product;
+    })
+    setCartList(updatedCart);
   }
 
   if (error) return <p>A network error was encountered</p>
@@ -63,6 +76,7 @@ const App = () => {
     );
   }
 
+  console.log(cartList);
   return (
     <div className="">
       <Navbar handleClick={handleCartClick} />
@@ -73,7 +87,7 @@ const App = () => {
           null}
       {cartHidden ?
         null :
-        <ShoppingCart productList={productList} cartList={cartList} handleClick={handleCartClick} />
+        <ShoppingCart cartList={cartList} handleClick={handleCartClick} handleChange={onQtyChange} />
       }
     </div>
   )
