@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const Card = ({ id, title, price, image, handleAdding }) => {
   const [qty, setQty] = useState(1);
   return (
     <div className="w-72 h-96 p-3 rounded-xl border-4 border-stone-400 bg-stone-100 flex flex-col justify-center items-center text-center gap-1">
-      <h3 className="text-xl h-14 overflow-hidden">{title}</h3>
-      <img className="w-auto h-44" src={image} alt="Product illustration" />
+      <Link to={`item/${id}`}>
+        <h3 className="text-xl h-14 overflow-hidden">{title}</h3>
+      </Link>
+      <Link to={`item/${id}`}>
+        <img className="w-auto h-44" src={image} alt="Product illustration" />
+      </Link>
       <p className="text-xl">${price}</p>
       <div className="flex gap-3">
         <label htmlFor={id}>Quantity:</label>
