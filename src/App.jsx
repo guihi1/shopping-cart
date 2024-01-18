@@ -67,6 +67,15 @@ const App = () => {
     setCartList(updatedCart);
   }
 
+  const onRemoveFromCart = (title) => {
+    const updatedCart = cartList.filter((product) => {
+      if (product.title !== title) {
+        return product;
+      }
+    })
+    setCartList(updatedCart);
+  }
+
   if (error) return <p>A network error was encountered</p>
   if (loading) {
     return (
@@ -87,7 +96,7 @@ const App = () => {
           null}
       {cartHidden ?
         null :
-        <ShoppingCart cartList={cartList} handleClick={handleCartClick} handleChange={onQtyChange} />
+        <ShoppingCart cartList={cartList} handleClick={handleCartClick} handleChange={onQtyChange} handleRemove={onRemoveFromCart} />
       }
     </div>
   )
