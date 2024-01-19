@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Item from './pages/Item/Item';
 import Navbar from './components/Navbar/Navbar';
 import ShoppingCart from './components/ShoppingCart/ShoppingCart';
 import "./index.css";
@@ -12,8 +14,10 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const { id } = useParams();
+
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    fetch('https://fakestoreapi.com/products', { mode: "cors" })
       .then(res => {
         if (res.status >= 400) {
           throw new Error("server error");
@@ -50,7 +54,7 @@ const App = () => {
       });
       setCartList(updatedCart);
     } else {
-      setCartList((cartList) => ([...cartList, { title, qty: Number(qty), image, price: Number(price) }]));
+      setCartList((cartList) => ([...cartList, { id, title, qty: Number(qty), image, price: Number(price) }]));
     }
   }
 
@@ -85,15 +89,18 @@ const App = () => {
     );
   }
 
-  console.log(cartList);
   return (
     <div className="">
-      <Navbar handleClick={handleCartClick} />
+      <Navbar cartList={cartList} handleClick={handleCartClick} />
       {window.location.pathname === "/" ?
         <Home /> :
         window.location.pathname === "/shop" ?
           <Shopping productList={productList} handleAdding={handleAddingToCart} /> :
-          null}
+          window.location.pathname.slice(0, 5) === "/item" ?
+            productList.filter((product) => product.id === Number(id)).map((product) =>
+              <Item key={id} product={product} handleAdding={handleAddingToCart} />
+            ) :
+            null}
       {cartHidden ?
         null :
         <ShoppingCart cartList={cartList} handleClick={handleCartClick} handleChange={onQtyChange} handleRemove={onRemoveFromCart} />
