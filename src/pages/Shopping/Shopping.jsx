@@ -4,7 +4,7 @@ import Card from "../../components/Card/Card";
 
 const Shopping = ({ productList, handleAdding }) => {
   const [category, setCategory] = useState("all");
-  console.log(productList);
+
   return (
     <>
       <div className="m-5 text-center lg:m-10 lg:text-left">
