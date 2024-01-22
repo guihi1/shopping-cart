@@ -41,7 +41,7 @@ const Item = ({ product, handleAdding }) => {
             <option value="10">10</option>
           </select>
         </div>
-        <button className="rounded-xl bg-green-300 p-2 hover:bg-green-400" type="button" onClick={() => handleAdding(product.title, qty, product.image, product.price)}>Add to cart</button>
+        <button className="rounded-xl bg-green-300 p-2 hover:bg-green-400 active:bg-green-500" type="button" onClick={() => handleAdding(product.id, product.title, qty, product.image, product.price)}>Add to cart</button>
       </div>
     </div>
   );
