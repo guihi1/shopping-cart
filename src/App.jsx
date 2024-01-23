@@ -29,13 +29,7 @@ const App = () => {
       .finally(() => setLoading(false))
   }, []);
 
-  const handleCartClick = () => {
-    if (cartHidden) {
-      setCartHidden(false);
-    } else {
-      setCartHidden(true);
-    }
-  }
+  const handleCartClick = () => setCartHidden(cartHidden => !cartHidden);
 
   const handleAddingToCart = (id, title, qty, image, price) => {
     let exists = cartList.filter((product) => {
