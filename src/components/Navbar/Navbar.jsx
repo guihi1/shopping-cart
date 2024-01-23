@@ -9,12 +9,9 @@ const Navbar = ({ cartList, productList, handleClick }) => {
     <nav className="flex justify-between items-center p-4 bg-slate-200 sticky top-0 h-16">
       <Link className="font-bold italic" to="/">FakeShop</Link>
       <SearchBar productList={productList} />
-      <button type="button" onClick={handleClick}>
-        {cartList.length > 0 ?
-          <div className="w-2 h-2 relative left-6 bottom-2 rounded-full bg-cyan-900 animate-ping inline-block"></div> :
-          null
-        }
+      <button className="flex gap-2" type="button" onClick={handleClick}>
         <ShoppingCartRounded />
+        <div className="border-2 border-gray-500 w-6 h-6 flex justify-center items-center">{cartList.length}</div>
       </button>
     </nav >
   )
