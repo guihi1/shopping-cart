@@ -7,7 +7,7 @@ const SearchBar = ({ productList }) => {
 
   return (
     <div>
-      <input className="p-1 rounded-xl w-60 lg:w-96" type="search" value={searchInput} placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
+      <input className="p-1 rounded-xl w-52 lg:w-96" type="search" value={searchInput} placeholder="Search..." onChange={(e) => setSearchInput(e.target.value)} />
       <div className="fixed flex flex-col bg-white">
         {productList.filter((product) => {
           if (searchInput.toLowerCase() === product.title.slice(0, searchInput.length).toLowerCase() && searchInput !== "") {
