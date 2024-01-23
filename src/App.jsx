@@ -37,7 +37,7 @@ const App = () => {
     }
   }
 
-  const handleAddingToCart = (title, qty, image, price) => {
+  const handleAddingToCart = (id, title, qty, image, price) => {
     let exists = cartList.filter((product) => {
       return Object.values(product).includes(title);
     }).length > 0;
@@ -90,8 +90,8 @@ const App = () => {
   }
 
   return (
-    <div className="">
-      <Navbar cartList={cartList} handleClick={handleCartClick} />
+    <div>
+      <Navbar cartList={cartList} productList={productList} handleClick={handleCartClick} />
       {window.location.pathname === "/" ?
         <Home /> :
         window.location.pathname === "/shop" ?
