@@ -10,6 +10,7 @@ const Shopping = ({ productList, handleAdding }) => {
       <div className="m-5 text-center lg:m-10 lg:text-left">
         <label htmlFor="category">Category: </label>
         <select
+          className="p-2 rounded-md ml-2"
           id="category"
           name="category"
           onChange={(e) => setCategory(e.target.value)}
