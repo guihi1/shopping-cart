@@ -1,4 +1,4 @@
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Star } from "@mui/icons-material";
 
@@ -28,7 +28,11 @@ const Item = ({ product, handleAdding }) => {
         <p>{product.description}</p>
         <div className="flex gap-3">
           <label htmlFor={product.description}>Quantity:</label>
-          <select name="qty" id={product.description} onChange={(e) => setQty(e.target.value)}>
+          <select
+            name="qty"
+            id={product.description}
+            onChange={(e) => setQty(e.target.value)}
+          >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -41,15 +45,29 @@ const Item = ({ product, handleAdding }) => {
             <option value="10">10</option>
           </select>
         </div>
-        <button className="rounded-xl bg-green-300 p-2 hover:bg-green-400 active:bg-green-500" type="button" onClick={() => handleAdding(product.id, product.title, qty, product.image, product.price)}>Add to cart</button>
+        <button
+          className="rounded-xl bg-green-300 p-2 hover:bg-green-400 active:bg-green-500"
+          type="button"
+          onClick={() =>
+            handleAdding(
+              product.id,
+              product.title,
+              qty,
+              product.image,
+              product.price,
+            )
+          }
+        >
+          Add to cart
+        </button>
       </div>
     </div>
   );
-}
+};
 
 Item.propTypes = {
   product: PropTypes.object,
   handleAdding: PropTypes.func,
-}
+};
 
 export default Item;

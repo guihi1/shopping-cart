@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types'
-import { Delete } from '@mui/icons-material'
+import PropTypes from "prop-types";
+import { Delete } from "@mui/icons-material";
 
 const CartCard = ({ title, price, image, qty, handleChange, handleRemove }) => {
   return (
@@ -25,10 +25,15 @@ const CartCard = ({ title, price, image, qty, handleChange, handleRemove }) => {
           </select>
         </div>
       </div>
-      <div className="h-full flex items-start p-2 cursor-pointer" onClick={() => handleRemove(title)}><Delete color="action" /></div>
+      <div
+        className="h-full flex items-start p-2 cursor-pointer"
+        onClick={() => handleRemove(title)}
+      >
+        <Delete color="action" />
+      </div>
     </div>
-  )
-}
+  );
+};
 
 CartCard.propTypes = {
   title: PropTypes.string,
@@ -37,6 +42,6 @@ CartCard.propTypes = {
   qty: PropTypes.number,
   handleChange: PropTypes.func,
   handleRemove: PropTypes.func,
-}
+};
 
 export default CartCard;

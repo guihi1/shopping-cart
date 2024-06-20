@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Card = ({ id, title, price, image, handleAdding }) => {
   const [qty, setQty] = useState(1);
@@ -28,10 +28,16 @@ const Card = ({ id, title, price, image, handleAdding }) => {
           <option value="10">10</option>
         </select>
       </div>
-      <button className="rounded-xl bg-green-300 p-2 hover:bg-green-400 active:bg-green-500" type="button" onClick={() => handleAdding(id, title, qty, image, price)}>Add to cart</button>
+      <button
+        className="rounded-xl bg-green-300 p-2 hover:bg-green-400 active:bg-green-500"
+        type="button"
+        onClick={() => handleAdding(id, title, qty, image, price)}
+      >
+        Add to cart
+      </button>
     </div>
   );
-}
+};
 
 Card.propTypes = {
   id: PropTypes.number,
@@ -40,6 +46,6 @@ Card.propTypes = {
   price: PropTypes.number,
   image: PropTypes.string,
   handleAdding: PropTypes.func,
-}
+};
 
-export default Card
+export default Card;
